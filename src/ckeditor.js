@@ -28,6 +28,12 @@ import Paragraph from '@ckeditor/ckeditor5-paragraph/src/paragraph';
 import PasteFromOffice from '@ckeditor/ckeditor5-paste-from-office/src/pastefromoffice';
 import Table from '@ckeditor/ckeditor5-table/src/table';
 import TableToolbar from '@ckeditor/ckeditor5-table/src/tabletoolbar';
+import Alignment from '@ckeditor/ckeditor5-alignment/src/alignment';
+import MathType from '@wiris/mathtype-ckeditor5';
+import FontSize from '@ckeditor/ckeditor5-font/src/fontsize';
+import FontColor from '@ckeditor/ckeditor5-font/src/fontcolor';
+import FontFamily from '@ckeditor/ckeditor5-font/src/fontfamily';
+import CodeBlock from '@ckeditor/ckeditor5-code-block/src/codeblock';
 
 export default class ClassicEditor extends ClassicEditorBase {}
 
@@ -40,21 +46,20 @@ ClassicEditor.builtinPlugins = [
 	Italic,
 	BlockQuote,
 	CKFinder,
-	EasyImage,
 	Heading,
-	Image,
-	ImageCaption,
-	ImageStyle,
-	ImageToolbar,
-	ImageUpload,
 	Indent,
 	Link,
 	List,
-	MediaEmbed,
 	Paragraph,
 	PasteFromOffice,
 	Table,
-	TableToolbar
+	TableToolbar,
+	Alignment,
+	MathType,
+	FontSize,
+	FontColor,
+	FontFamily,
+	CodeBlock
 ];
 
 // Editor configuration.
@@ -69,15 +74,16 @@ ClassicEditor.defaultConfig = {
 			'bulletedList',
 			'numberedList',
 			'|',
-			'indent',
-			'outdent',
-			'|',
-			'imageUpload',
 			'blockQuote',
-			'insertTable',
-			'mediaEmbed',
+			'codeBlock',
 			'undo',
-			'redo'
+			'redo',
+			'alignment',
+			'fontSize',
+			'fontcolor',
+			'fontFamily',
+			'MathType',
+			'ChemType'
 		]
 	},
 	image: {
@@ -88,11 +94,13 @@ ClassicEditor.defaultConfig = {
 			'imageTextAlternative'
 		]
 	},
-	table: {
-		contentToolbar: [
-			'tableColumn',
-			'tableRow',
-			'mergeTableCells'
+	fontSize: {
+		options: [
+			'tiny',
+			'small',
+			'default',
+			'big',
+			'huge'
 		]
 	},
 	// This value must be kept in sync with the language defined in webpack.config.js.
