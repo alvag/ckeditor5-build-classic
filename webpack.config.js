@@ -7,6 +7,7 @@
 
 /* eslint-env node */
 
+require("@babel/polyfill");
 const path = require( 'path' );
 const webpack = require( 'webpack' );
 const { bundler, styles } = require( '@ckeditor/ckeditor5-dev-utils' );
@@ -17,7 +18,11 @@ module.exports = {
 	devtool: 'source-map',
 	performance: { hints: false },
 
-	entry: path.resolve( __dirname, 'src', 'ckeditor.js' ),
+	entry: [
+		"@babel/polyfill",
+		require.resolve( 'regenerator-runtime/runtime.js' ),
+		path.resolve( __dirname, 'src', 'ckeditor.js' )
+	],
 
 	output: {
 		// The name under which the editor will be exported.
@@ -81,6 +86,17 @@ module.exports = {
 							minify: true
 						} )
 					},
+				]
+			},
+			{
+				test: /ckeditor5-[^\/\\]+[\/\\].+\.js$/,
+				use: [
+					{
+						loader: 'babel-loader',
+						options: {
+							presets: [ require( '@babel/preset-env' ) ]
+						}
+					}
 				]
 			}
 		]
